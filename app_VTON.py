@@ -279,14 +279,14 @@ for ex_human in human_list_path:
 image_blocks = gr.Blocks().queue()
 with image_blocks as demo:
    
-    with gr.Row():
-        with gr.Column():
-            imgs = gr.ImageEditor(sources='upload', type="pil", label='Human. Mask with pen or use auto-masking', interactive=True)
-            with gr.Row():
-                category = gr.Radio(choices=["upper_body", "lower_body", "dresses"], label="Select Garment Category", value="upper_body")
-                is_checked = gr.Checkbox(label="Yes", info="Use auto-generated mask (Takes 5 seconds)",value=True)
-            with gr.Row():
-                is_checked_crop = gr.Checkbox(label="Yes", info="Use auto-crop & resizing",value=True)
+#    with gr.Row():
+#        with gr.Column():
+#            imgs = gr.ImageEditor(sources='upload', type="pil", label='Human. Mask with pen or use auto-masking', interactive=True)
+#            with gr.Row():
+#                category = gr.Radio(choices=["upper_body", "lower_body", "dresses"], label="Select Garment Category", value="upper_body")
+#                is_checked = gr.Checkbox(label="Yes", info="Use auto-generated mask (Takes 5 seconds)",value=True)
+#            with gr.Row():
+#                is_checked_crop = gr.Checkbox(label="Yes", info="Use auto-crop & resizing",value=True)
 
             example = gr.Examples(
                 inputs=imgs,
@@ -314,12 +314,12 @@ with image_blocks as demo:
             with gr.Row():
             # image_out = gr.Image(label="Output", elem_id="output-img", height=400)
                 image_gallery = gr.Gallery(label="Generated Images", show_label=True)
-            with gr.Row():
-                try_button = gr.Button(value="Try-on")
-                denoise_steps = gr.Number(label="Denoising Steps", minimum=20, maximum=120, value=30, step=1)
-                seed = gr.Number(label="Seed", minimum=-1, maximum=2147483647, step=1, value=1)
-                is_randomize_seed = gr.Checkbox(label="Randomize seed for each generated image", value=True)  
-                number_of_images = gr.Number(label="Number Of Images To Generate (it will start from your input seed and increment by 1)", minimum=1, maximum=9999, value=1, step=1)
+     #       with gr.Row():
+     #           try_button = gr.Button(value="Try-on")
+     #           denoise_steps = gr.Number(label="Denoising Steps", minimum=20, maximum=120, value=30, step=1)
+     #           seed = gr.Number(label="Seed", minimum=-1, maximum=2147483647, step=1, value=1)
+     #          is_randomize_seed = gr.Checkbox(label="Randomize seed for each generated image", value=True)  
+    #          number_of_images = gr.Number(label="Number Of Images To Generate (it will start from your input seed and increment by 1)", minimum=1, maximum=9999, value=1, step=1)
 
 
     try_button.click(fn=start_tryon, inputs=[imgs, garm_img, prompt, category, is_checked, is_checked_crop, denoise_steps, is_randomize_seed, seed, number_of_images], outputs=[image_gallery, masked_img],api_name='tryon')
